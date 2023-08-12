@@ -1,0 +1,131 @@
+/* ---------- captcha ----------*/
+.captchawrap {
+  text-align: center;
+  display: inline-block;
+  vertical-align: middle;
+  width: 150px;
+  height: 32px;
+  cursor: pointer;
+  line-height: 32px;
+  font-size: 0;
+  position: relative;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  font-family: var(--sans-serif);
+}
+
+.cw-loading::before {
+  content: '';
+  height: 18px;
+  width: 18px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 100%;
+  border: 2px solid transparent;
+  border-color: transparent transparent currentColor currentColor;
+  animation: c-spin .4s linear infinite;
+}
+
+@keyframes c-spin {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.captchaimage {
+  width: 150px;
+  height: 30px;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.captcha-msg {
+  display: inline-block;
+  font-size: 14px;
+  line-height: normal;
+  vertical-align: middle;
+  pointer-events: none;
+}
+
+.captchawrap:hover .captcha-msg {
+  border-bottom: 1px dashed currentColor;
+  margin-bottom: -1px;
+}
+
+.rotting-indicator {
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(to right, rgb(242, 16, 20) 0px, rgb(255, 133, 0) 22px, rgb(231, 208, 35) 56px, rgb(154, 223, 52) 99px, rgb(58, 196, 65) 150px);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.cw-running .captchaimage {
+  animation: rot 0.4s ease 2s 1 normal forwards;
+}
+
+.rotten-msg {
+  opacity: 0;
+}
+
+.cw-running .rotten-msg {
+  animation: rot-msg 0.4s ease 2s 1 normal forwards;
+}
+
+.cw-running .rotting-indicator {
+  animation: rot-countdown 2s linear normal forwards;
+}
+
+.captchawrap:not(.cw-initial) .captcha-show,
+.cw-initial .captchaimage,
+.cw-initial .rotten-msg,
+.cw-initial .rotting-indicator {
+  display: none;
+}
+
+@keyframes rot-countdown {
+  from {
+    width: 150px;
+  }
+
+  to {
+    width: 0px;
+    display: none;
+  }
+}
+
+@keyframes rot {
+  from {
+    opacity: 1
+  }
+
+  to {
+    opacity: 0.1
+  }
+}
+
+@keyframes rot-msg {
+  from {
+    opacity: 0
+  }
+
+  to {
+    opacity: 1
+  }
+}
+
+.captchaimage-invisible .captchaimage {
+  visibility: hidden;
+}
+
+/* ---------- /captcha ---------- */
